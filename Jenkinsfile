@@ -4,6 +4,8 @@ pipeline {
     stages {
         stage('Build')  {
             steps {
+                echo "Cloning..."
+                sh 'printenv'
                 echo "Building..."
                 sh 'yarn cwd=docusaurus build'
             }
