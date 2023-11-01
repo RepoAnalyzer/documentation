@@ -10,7 +10,12 @@ pipeline {
         }
 
         stage('Deploy') {
-            if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
+            when {
+                expression {
+                    currentBuild.result == null || currentBuild.result == 'SUCCESS'    
+                }
+            }
+            steps {
                 sh 'cp -r docusaurus/build/* /var/www/599271.cloud4box.ru/docs/'
             }
         }
