@@ -2,9 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello')  {
+        stage('Build')  {
             steps {
-                echo "hello jenkins!! hello sanya!"
+                echo "Building..."
+                sh 'yarn cwd=docusaurus build'
+            }
+        }
+
+        stage('Deploy') {
+            if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
+                sh 'cp -r docusaurus/build/* /var/www/599271.cloud4box.ru/docs/'
             }
         }
     }
