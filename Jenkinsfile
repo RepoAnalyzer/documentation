@@ -2,11 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Build')  {
+        stage('Installing dependencies')  {
             steps {
                 sh 'printenv'
+                echo "Installing..."
+                dir("${env.WORKSPACE}/docusaurus")
+                sh "yarn"
+            }
+        }
+
+        stage('Build')  {
+            steps {
                 echo "Building..."
-                sh "yarn cwd=${env.WORKSPACE}/docusaurus build"
+                sh "yarn build"
             }
         }
 
@@ -17,7 +25,7 @@ pipeline {
                 }
             }
             steps {
-                sh "cp -r ${env.WORKSPACE}/docusaurus/build/* /var/www/599271.cloud4box.ru/docs/"
+                sh "cp -r ./build/* /var/www/599271.cloud4box.ru/docs/"
             }
         }
     }
