@@ -7,15 +7,18 @@ pipeline {
                 sh "pwd"
                 sh 'printenv'
                 echo "Installing..."
-                dir("${env.WORKSPACE}/docusaurus")
-                sh "yarn"
+                dir("docusaurus") {
+                    sh "yarn"
+                }
             }
         }
 
         stage('Build')  {
             steps {
                 echo "Building..."
-                sh "yarn build"
+                dir("docusaurus") {
+                    sh "yarn build"
+                }
             }
         }
 
@@ -26,7 +29,9 @@ pipeline {
                 }
             }
             steps {
-                sh "cp -r ./build/* /var/www/599271.cloud4box.ru/docs/"
+                dir("docusaurus") {
+                    sh "cp -r ./build/* /var/www/599271.cloud4box.ru/docs/"
+                }
             }
         }
     }
