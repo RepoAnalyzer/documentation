@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Installing dependencies')  {
             steps {
+                sh "pwd"
                 sh 'printenv'
                 echo "Installing..."
                 dir("${env.WORKSPACE}/docusaurus")
