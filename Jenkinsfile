@@ -4,10 +4,9 @@ pipeline {
     stages {
         stage('Build')  {
             steps {
-                echo "Cloning..."
                 sh 'printenv'
                 echo "Building..."
-                sh 'yarn cwd=docusaurus build'
+                sh 'yarn cwd=${env.WORKSPACE}/docusaurus build'
             }
         }
 
@@ -18,7 +17,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'cp -r docusaurus/build/* /var/www/599271.cloud4box.ru/docs/'
+                sh 'cp -r ${env.WORKSPACE}/docusaurus/build/* /var/www/599271.cloud4box.ru/docs/'
             }
         }
     }
