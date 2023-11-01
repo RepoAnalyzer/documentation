@@ -8,7 +8,7 @@ pipeline {
                 sh 'printenv'
                 echo "Installing..."
                 dir("docusaurus") {
-                    sh "yarn"
+                    yarn 'install'
                 }
             }
         }
@@ -17,7 +17,7 @@ pipeline {
             steps {
                 echo "Building..."
                 dir("docusaurus") {
-                    sh "yarn build"
+                    yarn 'build'
                 }
             }
         }
