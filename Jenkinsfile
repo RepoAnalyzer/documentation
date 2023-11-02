@@ -2,6 +2,14 @@ pipeline {
     agent any
 
     stages {
+        stage('Pre-notificate') {
+            steps {
+                commentPullRequestOnGh() {
+                    message "Started deploying!"
+                }
+            }
+        }
+
         stage('Installing dependencies')  {
             steps {
                 sh "pwd"
@@ -52,7 +60,7 @@ pipeline {
             }
             steps {
                 commentPullRequestOnGh() {
-                    message("Deployment finished!")
+                    message "Deployment finished!"
                 }
             }
         }
