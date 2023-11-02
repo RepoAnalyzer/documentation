@@ -17,9 +17,7 @@ pipeline {
             steps {
                 echo "Building..."
                 dir("docusaurus") {
-                    fileOperations([
-                        fileCreateOperation(fileName: ".env", fileContent: "REACT_APP_WWW_LOCATION=${env.GIT_BRANCH}")
-                    ])
+                    sh "export REACT_APP_WWW_LOCATION=${env.GIT_BRANCH}"
                     yarn 'build'
                 }
             }
