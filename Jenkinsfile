@@ -53,6 +53,7 @@ pipeline {
 		success {
             publishChecks name: 'Deployment', title: 'Deployment',
                 summary: "Open [url](${SITE}/${env.GIT_BRANCH}) to see deployed docs",
+                text: "Силушка богатырская помогла все пройти. Славно!"
                 detailsURL: "${env.RUN_DISPLAY_URL}"
 		}
 	}
