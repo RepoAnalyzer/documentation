@@ -4,9 +4,7 @@ pipeline {
     stages {
         stage('Pre-notificate') {
             steps {
-                commentPullRequestOnGh() {
-                    message "Started deploying!"
-                }
+                echo "${currentBuild.description}"
             }
         }
 
@@ -52,17 +50,17 @@ pipeline {
             }
         }
 
-        stage('Notificate') {
-            when {
-                expression {
-                    currentBuild.result == null || currentBuild.result == "SUCCESS"
-                }
-            }
-            steps {
-                commentPullRequestOnGh() {
-                    message "Deployment finished!"
-                }
-            }
-        }
+        // stage('Notificate') {
+        //     when {
+        //         expression {
+        //             currentBuild.result == null || currentBuild.result == "SUCCESS"
+        //         }
+        //     }
+        //     steps {
+        //         commentPullRequestOnGh() {
+        //             message "Deployment finished!"
+        //         }
+        //     }
+        // }
     }
 }
