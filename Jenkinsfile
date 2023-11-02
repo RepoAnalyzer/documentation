@@ -55,5 +55,6 @@ pipeline {
                     message("Deployment finished!")
                 }
             }
+        }
     }
 }
