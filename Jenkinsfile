@@ -51,9 +51,10 @@ pipeline {
 
 	post {
 		success {
-            publishChecks name: 'test', title: 'Pipeline Check', summary: 'check through pipeline',
-                text: 'you can publish checks in pipeline script',
-                detailsURL: 'https://github.com/jenkinsci/'
+            publishChecks name: 'Deployment', title: 'Deployment', summary: 'Open url to see deployed docs',
+                text: 'Deployment result',
+                detailsURL: 'https://github.com/jenkinsci/',
+                externalURL: "${SITE}/${env.GIT_BRANCH}",
 		}
 	}
 }
