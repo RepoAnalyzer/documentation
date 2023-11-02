@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SITE = '599271.cloud4box.ru/docs'
+        SITE = 'http://599271.cloud4box.ru/docs'
     }
 
     stages {
@@ -51,9 +51,9 @@ pipeline {
 
 	post {
 		success {
-            publishChecks name: 'Deployment', title: 'Deployment', summary: "Open [url](${SITE}/${env.GIT_BRANCH}) to see deployed docs",
-                text: 'Deployment result',
-                detailsURL: 'https://github.com/jenkinsci/'
+            publishChecks name: 'Deployment', title: 'Deployment',
+                summary: "Open [url](${SITE}/${env.GIT_BRANCH}) to see deployed docs",
+                detailsURL: "${env.RUN_DISPLAY_URL}"
 		}
 	}
 }
