@@ -31,12 +31,15 @@ pipeline {
                     currentBuild.result == null || currentBuild.result == "SUCCESS"
                 }
             }
+            environment {
+                SITE_BASE_LOCATION = '/var/www/599271.cloud4box.ru/docs'
+            }
             steps {
                 fileOperations([
-                    folderCreateOperation("var/www/599271.could4box.ru/docs/${env.GIT_BRANCH}")
+                    folderCreateOperation("${SITE_BASE_LOCATION}/${env.GIT_BRANCH}")
                 ])
                 dir("docusaurus") {
-                    sh "cp -r ./build/* /var/www/599271.cloud4box.ru/docs/${env.GIT_BRANCH}"
+                    sh "cp -r ./build/* ${SITE_BASE_LOCATION}/${env.GIT_BRANCH}"
                 }
             }
         }
