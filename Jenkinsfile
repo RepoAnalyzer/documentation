@@ -43,5 +43,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Notificate') {
+            when {
+                expression {
+                    currentBuild.result == null || currentBuild.result == "SUCCESS"
+                }
+            }
+            steps {
+                commentPullRequestOnGh() {
+                    message("Deployment finished!")
+                }
+            }
     }
 }
