@@ -1,13 +1,11 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Pre-notificate') {
-            steps {
-                echo "${currentBuild.description}"
-            }
-        }
+    environment {
+        SITE = '599271.cloud4box.ru/docs'
+    }
 
+    stages {
         stage('Installing dependencies')  {
             steps {
                 sh "pwd"
@@ -49,18 +47,11 @@ pipeline {
                 }
             }
         }
-
-        // stage('Notificate') {
-        //     when {
-        //         expression {
-        //             currentBuild.result == null || currentBuild.result == "SUCCESS"
-        //         }
-        //     }
-        //     steps {
-        //         commentPullRequestOnGh() {
-        //             message "Deployment finished!"
-        //         }
-        //     }
-        // }
     }
+
+	post {
+		success {
+			githubPRComment comment: githubPRMessage("See deployment at: ${SITE}/${env.GIT_BRANCH}"), statusVerifier: allowRunOnStatus("SUCCESS"), errorHandler: statusOnPublisherError("UNSTABLE")
+		}
+	}
 }
