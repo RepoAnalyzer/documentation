@@ -53,8 +53,7 @@ pipeline {
 		success {
             publishChecks name: 'test', title: 'Pipeline Check', summary: 'check through pipeline',
                 text: 'you can publish checks in pipeline script',
-                detailsURL: 'https://github.com/jenkinsci/',
-                actions: [[label:'an-user-request-action', description:'request pre-defined behaviours', identifier:'an unique identifier']]
+                detailsURL: 'https://github.com/jenkinsci/'
 		}
 	}
 }
