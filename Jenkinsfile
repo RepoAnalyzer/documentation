@@ -17,7 +17,9 @@ pipeline {
             steps {
                 echo "Building..."
                 dir("docusaurus") {
-                    sh "REACT_APP_WWW_LOCATION=${env.GIT_BRANCH}"
+                    fileOperations([
+                        fileCreateOperation(".env", "REACT_APP_WWW_LOCATION=${env.GIT_BRANCH}")
+                    ])
                     yarn 'build'
                 }
             }
