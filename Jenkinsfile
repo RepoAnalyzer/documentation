@@ -54,7 +54,7 @@ pipeline {
             publishChecks name: 'Deployment', title: 'Deployment', summary: 'Open url to see deployed docs',
                 text: 'Deployment result',
                 detailsURL: 'https://github.com/jenkinsci/',
-                externalURL: "${SITE}/${env.GIT_BRANCH}",
+                externalURL: "${SITE}/${env.GIT_BRANCH}"
 		}
 	}
 }
